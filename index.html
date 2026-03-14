@@ -4,54 +4,85 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jelfen | Plataforma médica</title>
-
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <title>Jelfen | Salud Inteligente</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <link rel="stylesheet" href="css/styles.css">
 </head>
 
 <body>
-    <nav>
-        <div class="logo" onclick="goHome()">Jelfen</div>
-        <button class="profile-btn">¿Eres médico? Únete</button>
-    </nav>
-
-    <div id="home">
-        <section class="hero">
-            <h1>Encuentra médicos especialistas</h1>
-            <p>Consulta profesionales certificados desde casa</p>
-        </section>
-        <div class="search">
-            <input id="searchInput" placeholder="Buscar médico o especialidad">
-            <i class="fas fa-search"></i>
+    <header>
+        <div class="logo" onclick="navigate('home')">
+            <i class="fas fa-heart"></i> Jelfen
+            <span>Salud Inteligente</span>
         </div>
-        <div class="doctors" id="doctorList"></div>
+        <nav>
+            <a onclick="navigate('home')">Inicio</a>
+            <a onclick="navigate('especialidades')">Especialidades</a>
+            <a onclick="navigate('nosotros')">Nosotros</a>
+            <a href="#">Contacto</a>
+            <a href="#">Mi Cuenta</a>
+        </nav>
+        <button class="mi-cuenta-btn">Mi Cuenta</button>
+    </header>
+
+    <div id="home" class="page">
+        <section class="hero">
+            <div class="hero-content">
+                <h1>Encuentra a los mejores especialistas para ti</h1>
+                <p>Consulta a médicos altamente calificados en línea.</p>
+                <button class="buscar-btn" onclick="navigate('especialidades')">Buscar Especialista <i
+                        class="fas fa-arrow-right"></i></button>
+            </div>
+            <div class="hero-image">
+                <img src="https://c8.alamy.com/comp/2G360FD/portrait-of-smiling-mexican-nurse-or-medical-student-at-hospital-2G360FD.jpg"
+                    alt="Doctora">
+            </div>
+        </section>
+
+        <section class="specialists">
+            <h2>Nuestros Especialistas</h2>
+            <div class="search">
+                <input id="searchInput" placeholder="Buscar médico o especialidad...">
+                <i class="fas fa-search"></i>
+            </div>
+            <div class="doctors-wrapper">
+                <button id="prevBtn" class="arrow"><i class="fas fa-chevron-left"></i></button>
+                <div class="doctors" id="doctorList"></div>
+                <button id="nextBtn" class="arrow"><i class="fas fa-chevron-right"></i></button>
+            </div>
+        </section>
     </div>
 
-    <div id="profilePage" class="profile">
-        <button class="back" onclick="goHome()">← Volver</button>
-        <div id="profileContent"></div>
+    <div id="especialidades" class="page" style="display:none; padding:100px 8%; text-align:center;">
+        <h1>Hola mundo - Especialidades</h1>
     </div>
 
-    <!-- CHAT -->
+    <div id="nosotros" class="page" style="display:none; padding:100px 8%; text-align:center;">
+        <h1>Hola mundo - Nosotros</h1>
+    </div>
+
+    <!-- CHAT - CÍRCULO FLOTANTE AZUL (como imagen 2) -->
+    <div class="chat-toggle" onclick="toggleChat()">
+        <img src="images/flamingo.png" alt="Jelfen">
+    </div>
+
     <div class="chat" id="chat">
         <div class="chat-header" onclick="toggleChat()">
-            <span>Asistente médico</span>
-            <span>—</span>
+            <img src="images/flamingo.png" class="chat-mascot" alt="Jelfen">
+            <span>IA Jelfen</span>
         </div>
         <div class="chat-messages" id="messages"></div>
         <div class="chat-input">
-            <input id="input" placeholder="Describe tus síntomas">
+            <input id="input" placeholder="Describe tus síntomas...">
             <button onclick="send()">Enviar</button>
         </div>
     </div>
 
     <footer>
-        &copy; 2026 Jelfen - Plataforma médica ficticia para tarea educativa.
+        © 2026 Jelfen - Plataforma médica ficticia para tarea educativa.
     </footer>
 
-    <!-- JAVASCRIPT MODERNO (módulo) -->
     <script type="module" src="js/script.js"></script>
 </body>
 

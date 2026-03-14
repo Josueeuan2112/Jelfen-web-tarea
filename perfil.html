@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfil Médico - Jelfen</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+    <header>
+        <div class="logo" onclick="window.location.href='index.html'">
+            <i class="fas fa-heart"></i> Jelfen
+        </div>
+    </header>
+
+    <div class="profile">
+        <button class="back" onclick="window.location.href='index.html'">← Volver a Inicio</button>
+        <div id="profileContent"></div>
+    </div>
+
+    <script type="module">
+        import { doctors } from './js/data.js';
+
+        const params = new URLSearchParams(window.location.search);
+        const id = parseInt(params.get('id'));
+
+        if (!isNaN(id) && doctors[id]) {
+            const d = doctors[id];
+            let html = `
+                <div class="profile-card">
+                    <img src="${d.img}" alt="${d.name}">
+                    <div class="profile-info">
+                        <h1>${d.name}</h1>
+                        <h2>${d.spec}</h2>
+                        <ul>
+                            <li><i class="fas fa-heart"></i> ${d.treatments}</li>
+                            <li><i class="fas fa-clock"></i> ${d.exp} de experiencia</li>
+                            <li><i class="fas fa-hospital"></i> ${d.hospital}</li>
+                            <li><i class="fas fa-graduation-cap"></i> ${d.education}</li>
+                            <li><i class="fas fa-video"></i> ${d.consultType}</li>
+                        </ul>
+                        <div class="profile-buttons">
+                            <button class="profile-btn">📅 Agendar Cita</button>
+                            <button class="profile-btn" style="background:#0ea5e9;">💬 Enviar Mensaje</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="about-doctor">
+                    <h3>Acerca del Doctor</h3>
+                    <p>${d.desc}</p>
+                </div>
+
+                <div class="comments">
+                    <h3>Reseñas</h3>
+            `;
+
+            d.comments.forEach(c => {
+                const stars = '★'.repeat(c.rating) + '☆'.repeat(5 - c.rating);
+                html += `
+                    <div class="comment">
+                        <span class="reviewer">${c.name}, ${c.age} años</span>
+                        <span class="stars">${stars}</span>
+                        <p>${c.text}</p>
+                    </div>
+                `;
+            });
+
+            html += `</div>`;
+            document.getElementById('profileContent').innerHTML = html;
+        } else {
+            document.getElementById('profileContent').innerHTML = '<h2>Perfil no encontrado</h2>';
+        }
+    </script>
+</body>
+
+</html>
