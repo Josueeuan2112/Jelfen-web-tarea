@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jelfen | Plataforma médica</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        body {
+            margin: 0;
+            font-family: Inter;
+            background: #e0f7fa; /* Fondo cian claro suave */
+            color: #333; /* Texto oscuro para mejor legibilidad */
+        }
+        /* NAVBAR */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            padding: 18px 8%;
+            background: #ffffff; /* Blanco para navbar limpia */
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1); /* Sombra sutil */
+        }
+        .logo {
+            font-size: 26px;
+            font-weight: 600;
+            color: #22d3ee; /* Cian claro */
+            cursor: pointer; /* Para indicar que es clickable */
+        }
+        /* HERO */
+        .hero {
+            text-align: center;
+            padding: 60px 20px;
+            background: linear-gradient(to bottom, #a5f3fc, #e0f7fa); /* Gradiente cian claro suave */
+        }
+        .hero h1 {
+            font-size: 44px;
+            color: #22d3ee;
+        }
+        .hero p {
+            color: #555;
+        }
+        /* SEARCH */
+        .search {
+            text-align: center;
+            margin-bottom: 30px;
+            position: relative;
+        }
+        .search input {
+            padding: 12px 40px 12px 12px; /* Espacio para icono */
+            width: 400px; /* Más ancha */
+            border-radius: 10px;
+            border: 1px solid #ccc;
+            outline: none;
+            transition: border 0.3s;
+        }
+        .search input:focus {
+            border-color: #22d3ee;
+        }
+        .search i {
+            position: absolute;
+            right: 140px;
+            top: 14px;
+            color: #22d3ee;
+        }
+        /* DOCTORS GRID */
+        .doctors {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            padding: 30px 8%;
+        }
+        /* CARD */
+        .card {
+            background: #ffffff; /* Blanco para cards */
+            border-radius: 16px;
+            overflow: hidden;
+            transition: .3s;
+            box-shadow: 0 10px 30px rgba(0,0,0,.1); /* Sombra más suave */
+            opacity: 0;
+            animation: fadeIn 0.5s forwards; /* Animación dinámica */
+        }
+        @keyframes fadeIn {
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .card:hover {
+            transform: translateY(-8px) scale(1.02);
+        }
+        .card img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+        }
+        .card-content {
+            padding: 18px;
+        }
+        .card h3 {
+            margin: 0;
+            font-size: 20px;
+            color: #22d3ee;
+        }
+        .spec {
+            color: #6c757d;
+        }
+        .desc {
+            font-size: 13px;
+            color: #555;
+            margin: 10px 0;
+            line-height: 1.4;
+        }
+        .rating {
+            color: #facc15;
+            margin: 6px 0;
+        }
+        .profile-btn {
+            margin-top: 10px;
+            background: linear-gradient(90deg, #22d3ee, #06b6d4); /* Gradiente cian claro */
+            border: none;
+            padding: 10px 14px;
+            border-radius: 10px;
+            color: white;
+            cursor: pointer;
+            transition: .2s;
+        }
+        .profile-btn:hover {
+            transform: scale(1.05);
+        }
+        /* PROFILE */
+        .profile {
+            display: none;
+            padding: 40px 8%;
+            background: #e0f7fa;
+        }
+        .profile img {
+            width: 240px;
+            border-radius: 14px;
+            margin-bottom: 20px;
+        }
+        .back {
+            background: #22d3ee;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            cursor: pointer;
+            color: white;
+        }
+        .comments {
+            margin-top: 20px;
+            background: #ffffff;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .comment {
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #e0f7fa; /* Línea cian claro */
+        }
+        .reviewer {
+            font-weight: 600;
+            color: #22d3ee;
+        }
+        .stars {
+            color: #facc15;
+            margin-left: 10px;
+        }
+        .comment p {
+            margin-top: 5px;
+            color: #555;
+        }
+        /* CHAT */
+        .chat {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 340px;
+            background: #ffffff; /* Blanco para chat moderno */
+            border-radius: 16px;
+            box-shadow: 0 10px 40px rgba(0,0,0,.1);
+            overflow: hidden;
+            transition: height 0.3s ease; /* Dinámica suave */
+        }
+        .chat.min {
+            height: 40px;
+        }
+        .chat-header {
+            background: linear-gradient(90deg, #22d3ee, #06b6d4); /* Cian claro */
+            padding: 12px;
+            display: flex;
+            justify-content: space-between;
+            cursor: pointer;
+            font-weight: 600;
+            color: white;
+        }
+        .chat-messages {
+            height: 250px;
+            overflow-y: auto;
+            padding: 10px;
+            background: #f8f9fa;
+        }
+        .msg {
+            padding: 10px 14px;
+            margin: 8px;
+            border-radius: 14px;
+            max-width: 80%;
+            font-size: 14px;
+        }
+        .user {
+            background: #22d3ee;
+            color: white;
+            margin-left: auto;
+        }
+        .bot {
+            background: #a5f3fc;
+            color: #333;
+        }
+        .chat-input {
+            display: flex;
+            border-top: 1px solid #ccc;
+        }
+        .chat-input input {
+            flex: 1;
+            padding: 10px;
+            border: none;
+            outline: none;
+        }
+        .chat-input button {
+            background: #22d3ee;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            color: white;
+        }
+        .link {
+            color: #22d3ee;
+            cursor: pointer;
+        }
+        /* Footer para look real */
+        footer {
+            text-align: center;
+            padding: 20px;
+            background: #ffffff;
+            color: #555;
+            border-top: 1px solid #ccc;
+            margin-top: 20px;
+        }
+        /* Media Queries para mejor responsividad en móviles */
+        @media (max-width: 768px) {
+            .search input {
+                width: 90%;
+            }
+            .search i {
+                right: 5%;
+            }
+            .chat {
+                width: 90%;
+                right: 5%;
+            }
+            .profile img {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="logo" onclick="goHome()">Jelfen</div>
+        <button class="profile-btn">¿Eres médico? Únete</button>
+    </nav>
+    <div id="home">
+        <section class="hero">
+            <h1>Encuentra médicos especialistas</h1>
+            <p>Consulta profesionales certificados desde casa</p>
+        </section>
+        <div class="search">
+            <input id="searchInput" placeholder="Buscar médico o especialidad">
+            <i class="fas fa-search"></i>
+        </div>
+        <div class="doctors" id="doctorList"></div>
+    </div>
+    <div id="profilePage" class="profile">
+        <button class="back" onclick="goHome()">← Volver</button>
+        <div id="profileContent"></div>
+    </div>
+    <!-- CHAT -->
+    <div class="chat" id="chat"> <!-- Inicia abierto para que responda de inmediato -->
+        <div class="chat-header" onclick="toggleChat()">
+            <span>Asistente médico</span>
+            <span>—</span>
+        </div>
+        <div class="chat-messages" id="messages"></div>
+        <div class="chat-input">
+            <input id="input" placeholder="Describe tus síntomas">
+            <button onclick="send()">Enviar</button>
+        </div>
+    </div>
+    <footer>
+        &copy; 2026 Jelfen - Plataforma médica ficticia para tarea educativa.
+    </footer>
+    <script>
+        // Variables para limpiar globals
+        const home = document.getElementById('home');
+        const profilePage = document.getElementById('profilePage');
+        const profileContent = document.getElementById('profileContent');
+        const searchInput = document.getElementById('searchInput');
+        const doctorList = document.getElementById('doctorList');
+        const chat = document.getElementById('chat');
+        const messages = document.getElementById('messages');
+        const input = document.getElementById('input');
+
+        /* DOCTORES */
+        const doctors = [
+            {
+                name: "Dr. Carlos Martínez",
+                spec: "Cardiólogo",
+                exp: "20 años",
+                img: "https://c8.alamy.com/comp/2J1TXK4/portrait-of-young-peruvian-male-doctor-smiling-and-looking-at-camera-isolated-2J1TXK4.jpg",
+                short: "Especialista en enfermedades cardiovasculares.",
+                desc: "Cardiólogo con más de 20 años de experiencia en diagnóstico y tratamiento del corazón.",
+                location: "Hospital Ángeles CDMX",
+                comments: [
+                    {name: "Juan Pérez", age: 45, rating: 5, text: "Excelente atención, me diagnosticó rápidamente y el tratamiento funcionó a la primera. Muy recomendado."},
+                    {name: "Ana García", age: 30, rating: 4, text: "Mi hija se recuperó rápido gracias a su atención. Muy empático y profesional."},
+                    {name: "María López", age: 38, rating: 3, text: "Buen profesional, aunque la espera fue un poco larga. Me ayudó con el diagnóstico."},
+                    {name: "Luis Rodríguez", age: 52, rating: 2, text: "No me ayudó mucho, la consulta fue muy breve y no resolvió mis dudas."},
+                    {name: "Carmen Ruiz", age: 41, rating: 5, text: "Gran doctor, explicó todo con detalle y el seguimiento fue excelente."}
+                ]
+            },
+            {
+                name: "Dra. Sofía Ramírez",
+                spec: "Pediatra",
+                exp: "15 años",
+                img: "https://c8.alamy.com/comp/2G360FD/portrait-of-smiling-mexican-nurse-or-medical-student-at-hospital-2G360FD.jpg",
+                short: "Especialista en salud infantil.",
+                desc: "Pediatra dedicada al cuidado integral de bebés y niños.",
+                location: "Clínica Infantil México",
+                comments: [
+                    {name: "Pedro Hernández", age: 28, rating: 5, text: "Muy amable con los niños, mi hijo se sintió cómodo y el tratamiento fue efectivo."},
+                    {name: "Laura Fernández", age: 35, rating: 4, text: "Buena doctora, atenta y clara. Me ayudó con el tratamiento de mi hija."},
+                    {name: "Roberto Sánchez", age: 42, rating: 3, text: "La consulta fue buena, pero un poco fría en el trato. El diagnóstico fue correcto."},
+                    {name: "Elena Vargas", age: 29, rating: 1, text: "No me ayudó, el tratamiento no funcionó y no dio alternativas."},
+                    {name: "Miguel Torres", age: 50, rating: 5, text: "Excelente pediatra, siempre disponible y con consejos útiles para padres."},
+                    {name: "Sofía Medina", age: 33, rating: 4, text: "Muy profesional, resolvió el problema de mi bebé en unas semanas."}
+                ]
+            },
+            {
+                name: "Dr. Alejandro Gómez",
+                spec: "Dermatólogo",
+                exp: "12 años",
+                img: "https://thumbs.dreamstime.com/b/young-handsome-hispanic-male-doctor-stethoscope-smiling-confidently-against-white-background-389416164.jpg",
+                short: "Especialista en enfermedades de la piel.",
+                desc: "Dermatólogo experto en tratamientos clínicos y estéticos.",
+                location: "Dermacenter",
+                comments: [
+                    {name: "Diego Morales", age: 40, rating: 5, text: "Excelente especialista, me ayudó a resolver mi problema de piel en unas semanas."},
+                    {name: "Clara Mendoza", age: 27, rating: 4, text: "Buen doctor, aunque un poco reservado. El tratamiento funcionó."},
+                    {name: "Jorge Vargas", age: 55, rating: 2, text: "No me ayudó, el tratamiento fue costoso y no vi resultados."},
+                    {name: "Patricia Ortiz", age: 36, rating: 5, text: "Muy recomendado, explicó todo y el resultado fue fantástico."},
+                    {name: "Andrés López", age: 48, rating: 3, text: "Atención regular, ayudó parcialmente pero tuve que volver varias veces."}
+                ]
+            },
+            {
+                name: "Dra. Laura Fernández",
+                spec: "Psicóloga",
+                exp: "18 años",
+                img: "https://thumbs.dreamstime.com/b/dentist-professional-s-gaze-compassionate-skilled-practitioner-focused-look-conveys-intensity-her-caring-profession-301435864.jpg",
+                short: "Especialista en ansiedad y estrés.",
+                desc: "Psicóloga clínica especializada en terapia cognitivo conductual.",
+                location: "Centro de Psicología",
+                comments: [
+                    {name: "Valeria Gómez", age: 32, rating: 5, text: "Gran terapeuta, me ayudó a manejar mi ansiedad de forma efectiva con sesiones prácticas."},
+                    {name: "Tomás Ruiz", age: 29, rating: 4, text: "Buena profesional, aunque las sesiones fueron un poco cortas. Me sentí mejor."},
+                    {name: "Isabel Castro", age: 45, rating: 1, text: "No conecté con su método, no me ayudó y perdí tiempo."},
+                    {name: "Fernando Díaz", age: 38, rating: 5, text: "Excelente, changed my life with her guidance on stress management."},
+                    {name: "Raquel Silva", age: 50, rating: 3, text: "Ayudó en parte, pero esperaba más herramientas personalizadas."},
+                    {name: "Óscar Mendoza", age: 26, rating: 4, text: "Muy empática, las sesiones fueron útiles para mi depresión."}
+                ]
+            }
+        ];
+
+        /* GENERAR MAS DOCTORES - Reducido a 12 para variedad */
+        const specs = ["Cardiólogo", "Pediatra", "Dermatólogo", "Psicólogo", "Neurólogo", "Ginecólogo", "Traumatólogo"];
+        const namePrefixes = ['Dr. Juan', 'Dra. Maria', 'Dr. Pedro', 'Dra. Luisa', 'Dr. Miguel', 'Dra. Carmen', 'Dr. Antonio'];
+        const locations = ['Hospital Ángeles CDMX', 'Clínica Infantil México', 'Dermacenter', 'Centro de Psicología', 'Hospital General', 'Clínica Especializada', 'Centro Médico ABC'];
+        const doctorImages = [
+            "https://www.keckmedicine.org/wp-content/uploads/2024/09/Mack-William_01a_online.jpg",
+            "https://www.datocms-assets.com/21281/1726587381-cyclematters-dr-kerry-nc2.jpg?auto=compress%2Cformat&q=75&w=900",
+            "https://www.orthobethesda.com/wp-content/uploads/2020/05/IMG_3258-scaled-e1610479406335-1024x683.jpg",
+            "https://content.presspage.com/uploads/2110/1920_aakriti-gupta-md-cedars-sinai.jpeg?16688",
+            "https://thumbs.dreamstime.com/b/medicine-healtcare-pediatry-people-concept-happy-doctor-pediatrician-holding-baby-medical-exam-clinic-100666872.jpg",
+            "https://orangecoast.com/wp-content/uploads/2023/05/zena-gabriel-md-dermatologist-horizontal-1024x683.jpg",
+            "https://ca-times.brightspotcdn.com/dims4/default/686e5ec/2147483647/strip/true/crop/5820x3056+0+412/resize/1200x630!/quality/75/?url=https%3A%2F%2Fcalifornia-times-brightspot.s3.us-east-1.amazonaws.com%2F1d%2F39%2Fffafa2bd43a0ae1b1fe35227eef8%2F1534224-sci-1215-psychiatrist-gilberg-rcg-148.jpg",
+            "https://ysm-res.cloudinary.com/image/upload/ar_16:9,c_fill,dpr_3.0,f_auto,g_faces:auto,q_auto:eco,w_500/v1/yms/prod/2e70b83a-814b-40d8-8a30-fb49455d379e",
+            "https://www.rmany.com/media/pages/our-team/physicians/dr-hernandez-nieto/fdfa856acb-1729794594/carlos_hernandez-hero.jpg",
+            "https://cf-images.us-east-1.prod.boltdns.net/v1/jit/1009789292001/40ffce5b-a785-4213-ae3e-5f43423572d4/main/1280x720/34s485ms/match/image.jpg",
+            "https://cdn.castleconnolly.com/dims4/default/0d30283/2147483647/strip/true/crop/2048x1536+0+0/resize/840x630!/quality/90/?url=http%3A%2F%2Fcastle-connolly-brightspot.s3.us-east-1.amazonaws.com%2F94%2F6d%2F6f239f72471fab698cb2f96fd362%2Fspotlight-header-images-77.png"
+        ];
+        for (let i = 5; i <= 16; i++) { // Reducido a 12 adicionales
+            const specIndex = (i - 1) % specs.length;
+            const nameIndex = (i - 1) % namePrefixes.length;
+            doctors.push({
+                name: namePrefixes[nameIndex] + " " + ['Pérez', 'García', 'Hernández', 'López', 'Martínez', 'Rodríguez', 'Sánchez'][specIndex],
+                spec: specs[specIndex],
+                exp: Math.floor(Math.random() * 15 + 5) + " años",
+                img: doctorImages[(i - 5) % doctorImages.length],
+                short: `Especialista en ${specs[specIndex].toLowerCase()} con enfoque personalizado.`,
+                desc: `Experto en el manejo de casos complejos en ${specs[specIndex].toLowerCase()}, con énfasis en prevención y tratamiento avanzado.`,
+                location: locations[specIndex],
+                comments: [
+                    {name: "Juan Pérez", age: 45, rating: 5, text: "Excelente atención, me diagnosticó rápidamente y el tratamiento funcionó a la primera. Muy recomendado para problemas cardíacos."},
+                    {name: "Ana García", age: 30, rating: 4, text: "Muy empática, ayudó a mi hijo con su condición. El seguimiento fue bueno, aunque la espera fue larga."},
+                    {name: "Diego Morales", age: 40, rating: 2, text: "No resolví mi problema, el tratamiento no fue efectivo y sentí que no escuchó mis preocupaciones."},
+                    {name: "María López", age: 38, rating: 5, text: "Profesional excepcional, me guió paso a paso y ahora me siento mucho mejor."},
+                    {name: "Luis Rodríguez", age: 52, rating: 3, text: "Atención decente, pero podría mejorar en explicación. Ayudó parcialmente."},
+                    {name: "Carmen Ruiz", age: 41, rating: 1, text: "No recomiendo, la consulta fue apresurada y no vi mejoras en mi salud."}
+                ]
+            });
+        }
+
+        /* RENDER */
+        function renderDoctors(list) {
+            const container = document.getElementById("doctorList");
+            let html = "";
+            list.forEach((d, i) => {
+                html += `
+                    <div class="card" style="animation-delay: ${i * 0.1}s;">
+                        <img src="${d.img}">
+                        <div class="card-content">
+                            <h3>${d.name}</h3>
+                            <div class="spec">${d.spec}</div>
+                            <div class="rating">★★★★★</div>
+                            <div class="desc">${d.short}</div>
+                            <button class="profile-btn" onclick="openProfile(${i})">
+                                Ver perfil
+                            </button>
+                        </div>
+                    </div>
+                `;
+            });
+            container.innerHTML = html;
+        }
+        renderDoctors(doctors);
+
+        /* BUSCADOR */
+        searchInput.addEventListener("input", function() {
+            let v = this.value.toLowerCase();
+            let filtered = doctors.filter(d =>
+                d.name.toLowerCase().includes(v) ||
+                d.spec.toLowerCase().includes(v)
+            );
+            renderDoctors(filtered);
+        });
+
+        /* PERFIL */
+        function openProfile(i) {
+            let d = doctors[i];
+            home.style.display = "none";
+            profilePage.style.display = "block";
+            let commentsHtml = "";
+            d.comments.forEach(c => {
+                let stars = '★'.repeat(c.rating) + '☆'.repeat(5 - c.rating);
+                commentsHtml += `
+                    <div class="comment">
+                        <span class="reviewer">${c.name}, ${c.age} años</span>
+                        <span class="stars">${stars}</span>
+                        <p>${c.text}</p>
+                    </div>
+                `;
+            });
+            profileContent.innerHTML = `
+                <h2>${d.name}</h2>
+                <img src="${d.img}">
+                <p><b>Especialidad:</b> ${d.spec}</p>
+                <p><b>Experiencia:</b> ${d.exp}</p>
+                <p><b>Ubicación:</b> ${d.location}</p>
+                <p>${d.desc}</p>
+                <button class="profile-btn">📅 Agendar cita virtual</button>
+                <div class="comments">
+                    <h3>Reseñas</h3>
+                    ${commentsHtml}
+                </div>
+            `;
+        }
+        function goHome() {
+            home.style.display = "block";
+            profilePage.style.display = "none";
+            renderDoctors(doctors); // Recargar la lista de doctores al volver
+        }
+
+        /* CHAT */
+        function toggleChat() {
+            chat.classList.toggle("min");
+        }
+        function send() {
+            let text = input.value;
+            if (!text) return;
+            add(text, "user");
+            let reply = ai(text);
+            setTimeout(() => add(reply, "bot"), 600);
+            input.value = "";
+        }
+        function add(t, type) {
+            let msg = document.createElement("div");
+            msg.className = "msg " + type;
+            msg.innerHTML = t;
+            messages.appendChild(msg);
+            messages.scrollTop = messages.scrollHeight;
+        }
+        /* IA SIMULADA - Mucho más funcional, con muchos síntomas y variaciones */
+        function ai(text) {
+            text = text.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, ""); // Normalizar para manejar acentos
+            let spec = '';
+            let detail = '';
+            let generalAdvice = 'Recuerda que esto no sustituye una consulta médica profesional. Si los síntomas son graves, busca atención inmediata.';
+            if (text.includes("pecho") || text.includes("corazon") || text.includes("palpitaciones") || text.includes("dolor pecho") || text.includes("opresion pecho") || text.includes("arritmia") || text.includes("hipertension") || text.includes("taquicardia") || text.includes("infarto") || text.includes("me duele el corazon")) {
+                spec = "Cardiólogo";
+                detail = "Sintomas como dolor en el pecho, palpitaciones o opresión podrían indicar problemas cardíacos como arritmias, hipertensión arterial o incluso un evento cardiovascular agudo. Monitorea tu pulso, evita actividades extenuantes y mide tu presión si es posible.";
+            } else if (text.includes("piel") || text.includes("erupcion") || text.includes("acne") || text.includes("picazon") || text.includes("manchas") || text.includes("sarpullido") || text.includes("eccema") || text.includes("psoriasis") || text.includes("dermatitis") || text.includes("me pica la piel") || text.includes("ronchas")) {
+                spec = "Dermatólogo";
+                detail = "Problemas en la piel como erupciones, picazón, manchas o acné podrían ser causados por alergias, infecciones fúngicas, bacterianas o condiciones crónicas como eczema o psoriasis. Evita rascarte para no empeorar, usa jabones suaves y mantén la piel hidratada.";
+            } else if (text.includes("ansiedad") || text.includes("estres") || text.includes("depresion") || text.includes("panico") || text.includes("insomnio") || text.includes("tristeza") || text.includes("ataque panico") || text.includes("me siento ansioso") || text.includes("no puedo dormir") || text.includes("fatiga mental") || text.includes("bajo animo")) {
+                spec = "Psicólogo";
+                detail = "Sintomas emocionales como ansiedad, estrés crónico, depresión o insomnio podrían relacionarse con trastornos mentales. Prueba técnicas de relajación como meditación o ejercicio ligero; una terapia como la cognitivo-conductual puede ser muy efectiva para manejar estos.";
+            } else if (text.includes("nino") || text.includes("bebe") || text.includes("fiebre infantil") || text.includes("vomito nino") || text.includes("diarrea bebe") || text.includes("tos nino") || text.includes("mi hijo tiene fiebre") || text.includes("bebe llora mucho") || text.includes("colicos") || text.includes("infeccion infantil")) {
+                spec = "Pediatra";
+                detail = "En niños o bebés, síntomas como fiebre, vómitos, diarrea o tos podrían indicar infecciones virales, bacterianas o problemas digestivos. Asegura hidratación constante, mide la fiebre cada pocas horas y evita medicamentos sin prescripción.";
+            } else if (text.includes("cabeza") || text.includes("migrana") || text.includes("dolor cabeza") || text.includes("mareo") || text.includes("vertigo") || text.includes("jaqueca") || text.includes("convulsion") || text.includes("me duele la cabeza") || text.includes("zumbido oidos") || text.includes("perdida equilibrio") || text.includes("neurologico")) {
+                spec = "Neurólogo";
+                detail = "Dolores de cabeza, migrañas, mareos o vértigo podrían deberse a tensión muscular, problemas vasculares, sinusitis o trastornos neurológicos como epilepsia. Descansa en un ambiente oscuro y silencioso, hidrátate bien y evita triggers como luces brillantes.";
+            } else if (text.includes("embarazo") || text.includes("menstruacion") || text.includes("ginecologico") || text.includes("dolor abdominal mujer") || text.includes("ciclo irregular") || text.includes("sangrado") || text.includes("dolor ovario") || text.includes("nauseas embarazo") || text.includes("mi periodo esta atrasado") || text.includes("endometriosis")) {
+                spec = "Ginecólogo";
+                detail = "Sintomas ginecológicos como irregularidades menstruales, dolor abdominal, náuseas o sangrado inusual podrían indicar desequilibrios hormonales, embarazo, endometriosis o infecciones. Lleva un registro de tu ciclo y evita automedicarte con hormonales.";
+            } else if (text.includes("hueso") || text.includes("fractura") || text.includes("articulacion") || text.includes("dolor brazo") || text.includes("esguince") || text.includes("dolor espalda") || text.includes("rodilla") || text.includes("me duele la espalda") || text.includes("torcedura") || text.includes("artritis") || text.includes("osteoporosis")) {
+                spec = "Traumatólogo";
+                detail = "Problemas musculoesqueléticos como dolor en huesos, articulaciones, fracturas o esguinces podrían ser por lesiones, artritis o desgaste. Aplica el método RICE (reposo, hielo, compresión, elevación) y evita cargar peso en la zona afectada.";
+            } else if (text.includes("fiebre") || text.includes("tos") || text.includes("gripe") || text.includes("resfriado") || text.includes("dolor garganta") || text.includes("congestion") || text.includes("estornudos") || text.includes("fatiga") || text.includes("me siento mal") || text.includes("infeccion")) {
+                detail = "Sintomas generales como fiebre, tos seca o productiva, gripe o resfriado podrían ser virales o bacterianos. Toma abundantes líquidos, descansa y usa paracetamol para la fiebre si supera 38°C. Si hay dificultad para respirar o persiste más de 5 días, busca ayuda urgente.";
+                return `${detail} Esto parece una condición común, pero si es severa, consulta un médico general. ${generalAdvice}`;
+            } else if (text.includes("estomago") || text.includes("diarrea") || text.includes("vomito") || text.includes("acidez") || text.includes("dolor abdominal") || text.includes("indigestion") || text.includes("gastritis") || text.includes("me duele el estomago") || text.includes("nauseas")) {
+                detail = "Problemas digestivos como dolor estomacal, diarrea, vómitos o acidez podrían indicar gastritis, intoxicación alimentaria o virus gastrointestinal. Come alimentos blandos, hidrátate con sueros orales y evita comidas pesadas o lácteos si hay diarrea.";
+                return `${detail} Para síntomas digestivos, un gastroenterólogo podría ser ideal, pero empieza con un médico general. ${generalAdvice}`;
+            } else if (text.includes("ojo") || text.includes("vision borrosa") || text.includes("dolor ojo") || text.includes("conjuntivitis") || text.includes("me duelen los ojos") || text.includes("lagrimeo")) {
+                detail = "Sintomas oculares como visión borrosa, dolor o lagrimeo podrían ser por conjuntivitis, fatiga visual o problemas refractivos. Lava los ojos con suero fisiológico y evita frotarlos; usa gotas lubricantes si es seco.";
+                return `${detail} Recomiendo un oftalmólogo para evaluación visual. ${generalAdvice}`;
+            } else if (text.includes("oido") || text.includes("dolor oido") || text.includes("zumbido") || text.includes("infeccion oido") || text.includes("me duele el oido") || text.includes("tinnitus")) {
+                detail = "Dolores de oído, zumbidos o infecciones podrían ser otitis, acumulación de cera o tinnitus. Evita introducir objetos y usa compresas calientes para alivio temporal.";
+                return `${detail} Un otorrinolaringólogo es el especialista adecuado. ${generalAdvice}`;
+            } else if (text.includes("dientes") || text.includes("dolor diente") || text.includes("encias") || text.includes("caries") || text.includes("me duele la muela")) {
+                detail = "Problemas dentales como dolor de dientes o encías hinchadas podrían indicar caries, gingivitis o abscesos. Enjuaga con agua salada y usa analgésicos orales.";
+                return `${detail} Consulta un odontólogo lo antes posible. ${generalAdvice}`;
+            } else if (text.includes("alergia") || text.includes("estornudos") || text.includes("rinitis") || text.includes("picazon nariz") || text.includes("alergico")) {
+                detail = "Sintomas alérgicos como estornudos, picazón o rinitis podrían ser por polen, polvo o alimentos. Usa antihistamínicos de venta libre y evita alérgenos conocidos.";
+                return `${detail} Un alergólogo puede realizar pruebas para identificar causas. ${generalAdvice}`;
+            } else if (text.includes("cancer") || text.includes("tumor") || text.includes("lunar cambiante") || text.includes("perdida peso inexplicable")) {
+                detail = "Sintomas graves como pérdida de peso inexplicable, fatiga extrema o cambios en lunares podrían indicar condiciones serias. No ignores estos; busca evaluación inmediata.";
+                return `${detail} Dependiendo de la zona, podría necesitar un oncólogo u otro especialista. Ve a urgencias si es agudo. ${generalAdvice}`;
+            }
+            if (spec) {
+                let index = doctors.findIndex(d => d.spec.toLowerCase() === spec.toLowerCase());
+                if (index !== -1) {
+                    return `${detail} Podría tratarse de un problema relacionado con ${spec.toLowerCase()}. Te recomiendo consultar a nuestro <span class="link" onclick="openProfile(${index})">${spec}</span>. ¿Puedes describir más síntomas, como duración o intensidad, para una mejor orientación? ${generalAdvice}`;
+                }
+            }
+            return "No reconozco claramente los síntomas descritos. Por favor, detalla más: ¿dónde duele, desde cuándo, qué intensidad (del 1 al 10), hay fiebre o otros signos? Esto me ayuda a sugerir el especialista adecuado. Recuerda, soy un asistente simulado, no un diagnóstico real. ${generalAdvice}";
+        }
+    </script>
+</body>
+</html>
