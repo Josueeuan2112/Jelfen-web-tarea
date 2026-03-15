@@ -12,26 +12,27 @@
 
 <body>
     <header>
-        <div class="logo" onclick="navigate('home')">
+        <div class="logo" onclick="window.location.href='index.html'">
             <i class="fas fa-heart"></i> Jelfen
             <span>Salud Inteligente</span>
         </div>
         <nav>
-            <a onclick="navigate('home')">Inicio</a>
-            <a onclick="navigate('especialidades')">Especialidades</a>
-            <a onclick="navigate('nosotros')">Nosotros</a>
+            <a href="index.html">Inicio</a>
+            <a href="especialidades.html">Especialidades</a>
+            <a href="#">Nosotros</a>
             <a href="#">Contacto</a>
             <a href="#">Mi Cuenta</a>
         </nav>
         <button class="mi-cuenta-btn">Mi Cuenta</button>
     </header>
 
+    <!-- HOME -->
     <div id="home" class="page">
         <section class="hero">
             <div class="hero-content">
                 <h1>Encuentra a los mejores especialistas para ti</h1>
                 <p>Consulta a médicos altamente calificados en línea.</p>
-                <button class="buscar-btn" onclick="navigate('especialidades')">Buscar Especialista <i
+                <button class="buscar-btn" onclick="window.location.href='especialidades.html'">Buscar Especialista <i
                         class="fas fa-arrow-right"></i></button>
             </div>
             <div class="hero-image">
@@ -54,15 +55,7 @@
         </section>
     </div>
 
-    <div id="especialidades" class="page" style="display:none; padding:100px 8%; text-align:center;">
-        <h1>Hola mundo - Especialidades</h1>
-    </div>
-
-    <div id="nosotros" class="page" style="display:none; padding:100px 8%; text-align:center;">
-        <h1>Hola mundo - Nosotros</h1>
-    </div>
-
-    <!-- CHAT - CÍRCULO FLOTANTE AZUL (como imagen 2) -->
+    <!-- CHAT -->
     <div class="chat-toggle" onclick="toggleChat()">
         <img src="images/flamingo.png" alt="Jelfen">
     </div>
