@@ -72,10 +72,16 @@ function ai(text) {
     } else if (/piel|erupcion|acne|picazon|manchas|sarpullido|eccema|psoriasis/.test(text)) {
         spec = "Dermatóloga";
         detail = "Problemas cutáneos suelen mejorar con cuidado local y evitando irritantes.";
-    } else if (/ansiedad|estres|depresion|panico|insomnio|tristeza/.test(text)) {
+    }
+    else if (/ansiedad|estres|depresion|panico|insomnio|tristeza/.test(text)) {
         spec = "Psicólogo";
         detail = "Síntomas emocionales responden bien a terapia y técnicas de relajación.";
-    } else if (/nino|bebe|fiebre.*infantil|vomito.*nino|diarrea.*bebe/.test(text)) {
+    }
+    else if (/huevotes|didier|grandes|enormes|anchos|grandotes|grandes|enormes|gigantescos/.test(text)) {
+        spec = "Ginecólogo";
+        detail = "Es imposible que tengas unos huevotes igual de grandes que los de Didier hermano, tienes que estar confundido.";
+    }
+    else if (/nino|bebe|fiebre.*infantil|vomito.*nino|diarrea.*bebe/.test(text)) {
         spec = "Pediatra";
         detail = "En niños la hidratación y control de fiebre son prioritarios.";
     } else if (/cabeza|migrana|dolor.*cabeza|mareo|vertigo/.test(text)) {
