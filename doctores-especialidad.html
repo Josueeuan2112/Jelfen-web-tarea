@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doctores por Especialidad - Jelfen</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+    <header>
+        <div class="logo" onclick="window.location.href='index.html'">
+            <i class="fas fa-heart"></i> Jelfen
+        </div>
+        <nav>
+            <a href="index.html">Inicio</a>
+            <a href="especialidades.html">Especialidades</a>
+            <a href="#">Nosotros</a>
+            <a href="#">Contacto</a>
+            <a href="#">Mi Cuenta</a>
+        </nav>
+        <button class="mi-cuenta-btn">Mi Cuenta</button>
+    </header>
+
+    <section class="doctores-especialidad">
+        <div class="container">
+            <button class="back" onclick="window.location.href='especialidades.html'">← Volver a Especialidades</button>
+            <h1 id="tituloEspecialidad">Doctores Especialistas</h1>
+            <div class="doctors-grid" id="doctoresGrid"></div>
+        </div>
+    </section>
+
+    <footer>
+        © 2026 Jelfen - Plataforma médica ficticia para tarea educativa.
+    </footer>
+
+    <script type="module">
+        import { doctors } from './js/data.js';
+
+        const params = new URLSearchParams(window.location.search);
+        const spec = params.get('spec');
+
+        if (spec) {
+            document.getElementById('tituloEspecialidad').textContent = `Doctores en ${spec}`;
+            const filtrados = doctors.filter(d => d.spec.toLowerCase().includes(spec.toLowerCase()));
+
+            let html = "";
+            filtrados.forEach((d, i) => {
+                const globalIndex = doctors.indexOf(d);
+                html += `
+                    <div class="card">
+                        <img src="${d.img}" alt="${d.name}">
+                        <h3>${d.name}</h3>
+                        <div class="spec">${d.spec}</div>
+                        <div class="rating">${'★'.repeat(Math.floor(d.rating))}${'☆'.repeat(5 - Math.floor(d.rating))} <span>(${d.rating})</span></div>
+                        <button class="profile-btn" onclick="window.location.href='perfil.html?id=${globalIndex}'">Ver Perfil</button>
+                    </div>
+                `;
+            });
+
+            document.getElementById('doctoresGrid').innerHTML = html || "<p>No se encontraron doctores en esta especialidad.</p>";
+        } else {
+            document.getElementById('doctoresGrid').innerHTML = "<p>No se especificó especialidad.</p>";
+        }
+    </script>
+</body>
+
+</html>
