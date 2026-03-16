@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nosotros - Jelfen Salud Inteligente</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        /* ==================== ESTILOS ESPECÍFICOS NOSOTROS ==================== */
+        .nosotros-hero {
+            padding: 90px 8%;
+            background: linear-gradient(135deg, #f0f9ff 0%, #bae6fd 100%);
+            display: flex;
+            align-items: center;
+            gap: 60px;
+        }
+
+        .nosotros-hero h1 {
+            font-size: 52px;
+            font-weight: 700;
+            color: #1e293b;
+            line-height: 1.05;
+        }
+
+        .nosotros-hero p {
+            font-size: 22px;
+            color: #475569;
+            max-width: 520px;
+        }
+
+        .mision-icon {
+            width: 90px;
+            height: 90px;
+            background: #e0f2fe;
+            border-radius: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 30px rgba(14, 165, 233, 0.15);
+        }
+
+        .check-item {
+            transition: all 0.3s ease;
+        }
+
+        .check-item:hover {
+            transform: translateX(8px);
+        }
+
+        .priority-box button {
+            transition: all 0.3s ease;
+        }
+
+        .priority-box button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 15px 40px rgba(20, 184, 166, 0.4);
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- HEADER (exacto como en tus otras páginas) -->
+    <header>
+        <div class="logo" onclick="window.location.href='index.html'">
+            <i class="fas fa-heart"></i> Jelfen
+            <span>Salud Inteligente</span>
+        </div>
+        <nav>
+            <a href="index.html">Inicio</a>
+            <a href="especialidades.html">Especialidades</a>
+            <a href="nosotros.html" class="active">Nosotros</a>
+            <a href="#">Contacto</a>
+            <a href="#">Mi Cuenta</a>
+        </nav>
+        <button class="mi-cuenta-btn">Mi Cuenta</button>
+    </header>
+
+    <!-- HERO -->
+    <section class="nosotros-hero">
+        <div
+            style="max-width:1280px; margin:0 auto; width:100%; display:grid; grid-template-columns:1fr 1fr; gap:60px; align-items:center;">
+            <div>
+                <h1>Nosotros</h1>
+                <p>Cuidamos tu salud con tecnología y expertos de confianza.</p>
+            </div>
+            <div>
+                <img src="images/equipo-nosotros.png" alt="Equipo Jelfen"
+                    style="width:100%; border-radius:28px; box-shadow:0 25px 60px rgba(0,0,0,0.15);">
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTENIDO -->
+    <section style="padding:80px 8%; background:white;">
+        <div style="max-width:1280px; margin:0 auto; display:grid; grid-template-columns:1fr 1fr; gap:80px;">
+
+            <!-- IZQUIERDA -->
+            <div>
+                <div style="display:flex; align-items:center; gap:24px; margin-bottom:32px;">
+                    <div class="mision-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none"
+                            stroke="#0ea5e9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="3" y="4" width="18" height="16" rx="2" />
+                            <path
+                                d="M12 8.5C12 7 13 6 14.5 6C16 6 17 7.5 17 8.5C17 10 12 13 12 13C12 13 7 10 7 8.5C7 7.5 8 6 9.5 6C11 6 12 7 12 8.5Z" />
+                        </svg>
+                    </div>
+                    <h2 style="font-size:38px; font-weight:600; color:#1e293b;">Nuestra Misión</h2>
+                </div>
+                <p style="font-size:19px; line-height:1.7; color:#334155;">
+                    En Jelfen estamos comprometidos con mejorar el acceso a la salud,
+                    brindando atención médica de alta calidad a través de tecnología de última generación
+                    que conecta a pacientes con especialistas calificados.
+                </p>
+
+                <img src="images/doctor-paciente.png" alt="Atención personalizada"
+                    style="margin-top:50px; width:100%; border-radius:24px; box-shadow:0 20px 50px rgba(0,0,0,0.1);">
+            </div>
+
+            <!-- DERECHA -->
+            <div>
+                <h3 style="font-size:36px; font-weight:600; margin-bottom:40px; color:#1e293b;">Por qué elegir Jelfen
+                </h3>
+
+                <div style="display:flex; flex-direction:column; gap:32px;">
+                    <div class="check-item">
+                        <div class="check-circle">✔</div>
+                        <div>
+                            <h4 style="font-weight:600; font-size:19px;">Médicos Calificados</h4>
+                            <p style="color:#64748b;">Colaboramos con profesionales altamente capacitados y
+                                certificados.</p>
+                        </div>
+                    </div>
+                    <div class="check-item">
+                        <div class="check-circle">✔</div>
+                        <div>
+                            <h4 style="font-weight:600; font-size:19px;">Atención Accesible</h4>
+                            <p style="color:#64748b;">Consulta a especialistas desde la comodidad de tu hogar.</p>
+                        </div>
+                    </div>
+                    <div class="check-item">
+                        <div class="check-circle">✔</div>
+                        <div>
+                            <h4 style="font-weight:600; font-size:19px;">Tecnología Avanzada</h4>
+                            <p style="color:#64748b;">Utilizamos IA y herramientas digitales para tu cuidado.</p>
+                        </div>
+                    </div>
+                    <div class="check-item">
+                        <div class="check-circle">✔</div>
+                        <div>
+                            <h4 style="font-weight:600; font-size:19px;">Privacidad y Seguridad</h4>
+                            <p style="color:#64748b;">Protegemos tus datos con los más altos estándares de seguridad.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- BOTÓN MEJORADO -->
+                <div class="priority-box">
+                    <h3 style="font-size:28px; font-weight:600; color:#1e293b;">Tu salud es nuestra prioridad.</h3>
+                    <p style="font-size:18px; color:#475569; margin-top:16px;">
+                        Conéctate con médicos expertos y recibe el mejor cuidado desde cualquier lugar.
+                    </p>
+                    <button onclick="window.location.href='especialidades.html'" class="buscar-btn"
+                        style="margin-top:32px; width:100%;">
+                        Buscar Especialista →
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CHAT (ahora 100% consistente con styles.css) -->
+    <div class="chat-toggle" onclick="toggleChat()">
+        <img src="images/flamingo.png" alt="Jelfen">
+    </div>
+
+    <div class="chat" id="chat">
+        <div class="chat-header" onclick="toggleChat()">
+            <img src="images/flamingo.png" class="chat-mascot" alt="Jelfen">
+            <span>IA Jelfen</span>
+        </div>
+        <div class="chat-messages" id="messages"></div>
+        <div class="chat-input">
+            <input id="input" placeholder="Describe tus síntomas..." onkeypress="if(event.key === 'Enter') send()">
+            <button onclick="send()">Enviar</button>
+        </div>
+    </div>
+
+    <!-- FOOTER (igual que en especialidades.html e index.html) -->
+    <footer>
+        © 2026 Jelfen - Plataforma médica ficticia para tarea educativa.
+    </footer>
+
+    <script>
+        // ==================== CHAT IA (corregido con clases reales de tu CSS) ====================
+        function toggleChat() {
+            const chat = document.getElementById('chat');
+            chat.style.display = (chat.style.display === 'block') ? 'none' : 'block';
+        }
+
+        function send() {
+            const input = document.getElementById('input');
+            const messages = document.getElementById('messages');
+
+            if (input.value.trim() !== '') {
+                const userMsg = document.createElement('div');
+                userMsg.className = 'user';
+                userMsg.textContent = input.value;
+                messages.appendChild(userMsg);
+                messages.scrollTop = messages.scrollHeight;
+
+                setTimeout(() => {
+                    const iaMsg = document.createElement('div');
+                    iaMsg.className = 'bot';
+                    iaMsg.textContent = '¡Hola! Soy Jelfen IA. ¿En qué puedo ayudarte con tu salud hoy?';
+                    messages.appendChild(iaMsg);
+                    messages.scrollTop = messages.scrollHeight;
+                }, 700);
+
+                input.value = '';
+            }
+        }
+
+        window.onload = function () {
+            document.getElementById('chat').style.display = 'none';
+            console.log("✅ Nosotros mejorada y cargada correctamente");
+        };
+    </script>
+</body>
+
+</html>

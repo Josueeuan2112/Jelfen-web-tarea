@@ -561,3 +561,20 @@ footer {
     font-weight: 600;
     cursor: pointer;
 }
+
+/* ==================== ESTILOS NOSOTROS ==================== */
+nav a.active {
+    color: #0ea5e9;
+    position: relative;
+}
+
+nav a.active::after {
+    content: '';
+    position: absolute;
+    bottom: -6px;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: #0ea5e9;
+    border-radius: 3px;
+}
